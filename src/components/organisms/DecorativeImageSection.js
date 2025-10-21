@@ -4,20 +4,22 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// NOTE: Seleccionamos 4 imágenes representativas de la carpeta /public/platos
+// FIX: Importar imágenes directamente
+import imgTacos from '../../../public/platos/Image00007.jpg';
+import imgBurrito from '../../../public/platos/Image00002.jpg';
+import imgNachos from '../../../public/platos/Image00010.jpg';
+import imgSteak from '../../../public/platos/Image00013.jpg';
+
+// NOTE: Ahora usamos las variables importadas
 const galleryImages = [
-  { src: '/platos/Image00005.jpg', alt: 'Tacos crujientes' }, // (Original)
-  { src: '/platos/IMG_0044.jpeg', alt: 'Tacos de Barbacoa' },
-  { src: '/platos/Image00010.jpg', alt: 'Nachos de Fajita' }, // (Original)
-  { src: '/platos/27.jpg', alt: 'Mexican Steak' },          // (Original)
+  { src: imgTacos, alt: 'Tacos crujientes' },
+  { src: imgBurrito, alt: 'Burrito Mi Tierra' },
+  { src: imgNachos, alt: 'Nachos de Fajita' },
+  { src: imgSteak, alt: 'Mexican Steak' },
 ];
 
 export default function DecorativeImageSection({ lang, dict }) {
-  // NOTE: El alt text del diccionario ya no se usa directamente aquí,
-  // pero podría usarse para un título opcional si se quisiera añadir.
-
   return (
-    // FIX: Cambiado el fondo a blanco (bg-white) y ajustado el padding
     <section className="py-16 md:py-20 bg-white">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -26,25 +28,27 @@ export default function DecorativeImageSection({ lang, dict }) {
         viewport={{ once: true, amount: 0.2 }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        {/* FIX: Reemplazada imagen única por una cuadrícula de 4 imágenes */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {galleryImages.map((image, index) => (
             <motion.div
-              key={index}
+              // FIX: Usar image.src.src como key si el import devuelve un objeto
+              key={image.src.src || index}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, amount: 0.5 }}
-              className="relative aspect-square rounded-lg overflow-hidden shadow-md" // Contenedor para cada imagen
+              className="relative aspect-square rounded-lg overflow-hidden shadow-md"
             >
               <Image
+                // NOTE: src ahora es la variable importada
                 src={image.src}
-                alt={image.alt} // Usamos alt text específico por imagen
+                alt={image.alt}
                 fill
                 style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 45vw, 22vw" // Ajustar sizes para grid
-                quality={75} // Calidad ligeramente menor para galería
+                sizes="(max-width: 768px) 45vw, 22vw"
+                quality={75}
                 loading="lazy"
+                // placeholder="blur" // Puedes añadir blur si importas estáticamente
               />
             </motion.div>
           ))}
