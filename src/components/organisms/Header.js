@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi'; // Heroicons
-import { FaSearch } from 'react-icons/fa'; // Font Awesome icon <-- CORREGIDO
+import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
+import { FaSearch } from 'react-icons/fa';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
 import logo from '../../../public/logo2.png';
 
@@ -18,11 +18,15 @@ export default function Header({ lang, dict }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastYPos, setLastYPos] = useState(0);
-  const [localSearchTerm, setLocalSearchTerm] = useState(searchParams.get('q') || '');
+
+  // FIX: Leer el valor 'q' directamente para inicializar y usar como dependencia
+  const currentQueryParamValue = searchParams.get('q') || '';
+  const [localSearchTerm, setLocalSearchTerm] = useState(currentQueryParamValue);
 
   const isMenuPage = pathname.includes('/menu/');
 
-  // Efecto visibilidad scroll
+  // --- Effects ---
+  // Visibility effect
   useEffect(() => {
     const handleScroll = () => {
       const currentYPos = window.scrollY;
@@ -34,20 +38,21 @@ export default function Header({ lang, dict }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastYPos]);
 
-  // Efecto cerrar menú en cambio de ruta
+  // Close menu effect
   useEffect(() => { if (isMenuOpen) setIsMenuOpen(false); }, [pathname, isMenuOpen]);
 
-  // Efecto bloquear scroll body
+  // Scroll lock effect
   useEffect(() => { document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; return () => { document.body.style.overflow = 'auto'; }; }, [isMenuOpen]);
 
-  // Efecto sincronizar/limpiar búsqueda
-   useEffect(() => {
-      if (!isMenuPage) {
-          setLocalSearchTerm('');
-      } else {
-          setLocalSearchTerm(searchParams.get('q') || '');
+  // FIX: Effect to sync input with URL param 'q' - Depend on the actual value
+  useEffect(() => {
+      // Si el valor del parámetro URL es diferente del estado local, actualiza el estado local
+      if (currentQueryParamValue !== localSearchTerm) {
+         setLocalSearchTerm(currentQueryParamValue);
       }
-  }, [isMenuPage, pathname, searchParams]);
+      // Depender directamente del valor extraído de searchParams
+  }, [currentQueryParamValue]);
+
 
   const navLinks = [
     { name: dict.home, href: `/${lang}/` },
@@ -70,17 +75,41 @@ export default function Header({ lang, dict }) {
 
   const handleSearchChange = (e) => {
     const newSearchTerm = e.target.value;
-    setLocalSearchTerm(newSearchTerm);
+    setLocalSearchTerm(newSearchTerm); // Update input field
+
     const current = new URLSearchParams(Array.from(searchParams.entries()));
-    if (!newSearchTerm) {
+    const termToUse = newSearchTerm.trim(); // Trim spaces for URL
+
+    if (!termToUse) {
       current.delete('q');
     } else {
-      current.set('q', newSearchTerm);
+      current.set('q', termToUse);
     }
     const search = current.toString();
     const query = search ? `?${search}` : "";
-    router.replace(`${pathname}${query}`);
+
+    if (isMenuPage) {
+      router.replace(`${pathname}${query}`); // Update URL on menu page
+    }
+    // No redirigir automáticamente desde otras páginas al escribir, solo al presionar Enter
   };
+
+   const handleSearchSubmit = (e) => {
+    if (e.key === 'Enter') {
+        const termToUse = localSearchTerm.trim();
+         // Si no estamos en página de menú y hay término, navegamos
+         if (!isMenuPage && termToUse) {
+            const current = new URLSearchParams();
+            current.set('q', termToUse);
+            const query = `?${current.toString()}`;
+            router.push(`/${lang}/menu/lunch-dinner${query}`);
+         } else if (isMenuPage) {
+             // Si estamos en página de menú, aseguramos que la URL esté actualizada (handleSearchChange ya lo hace, pero esto es por si acaso)
+             handleSearchChange({ target: { value: localSearchTerm } }); // Simula el evento change
+         }
+         e.preventDefault();
+    }
+   };
 
   return (
     <>
@@ -100,18 +129,17 @@ export default function Header({ lang, dict }) {
                 {link.name}
               </Link>
             ))}
-            {isMenuPage && (
-              <div className="relative ml-4">
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  value={localSearchTerm}
-                  onChange={handleSearchChange}
-                  className="px-4 py-1.5 pl-8 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent w-40"
-                />
-                <FaSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-muted text-sm" />
-              </div>
-            )}
+            <div className="relative ml-4">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={localSearchTerm}
+                onChange={handleSearchChange}
+                onKeyDown={handleSearchSubmit}
+                className="px-4 py-1.5 pl-8 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent w-40 md:w-48 lg:w-56"
+              />
+              <FaSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-muted text-sm" />
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -123,24 +151,24 @@ export default function Header({ lang, dict }) {
         </nav>
       </header>
 
+      {/* Panel Menú Móvil */}
       <div
         className={`fixed inset-0 bg-background z-30 transform transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full pt-20 space-y-8">
-          {isMenuPage && (
-            <div className="relative w-4/5 max-w-xs mb-4">
-               <input
-                 type="text"
-                 placeholder="Buscar platillo..."
-                 value={localSearchTerm}
-                 onChange={handleSearchChange}
-                 className="w-full px-5 py-2.5 pl-10 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
-               />
-               <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted text-base" />
-             </div>
-          )}
+          <div className="relative w-4/5 max-w-xs mb-4">
+             <input
+               type="text"
+               placeholder="Buscar platillo..."
+               value={localSearchTerm}
+               onChange={handleSearchChange}
+               onKeyDown={handleSearchSubmit}
+               className="w-full px-5 py-2.5 pl-10 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
+             />
+             <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted text-base" />
+           </div>
           {navLinks.map((link) => (
             <Link key={link.name} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-2xl font-semibold text-secondary hover:text-primary transition-colors">
               {link.name}
