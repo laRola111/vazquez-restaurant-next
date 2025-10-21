@@ -6,12 +6,12 @@ import { motion } from 'framer-motion';
 
 // NOTE: Selección de 6 imágenes de la carpeta /public/platos para la galería principal
 const galleryImages = [
-  { src: '/platos/Image00013.jpg', alt: 'Menudo' }, // Menudo
-  { src: '/platos/Image00009.jpg', alt: 'Tacos al Pastor Plate' }, // Plato Pastor
-  { src: '/platos/Image00021.jpg', alt: 'Chilaquiles Plate' }, // Plato Chilaquiles
-  { src: '/platos/28.jpg', alt: 'Enchilada' }, // Enchilada closeup
-  { src: '/platos/Image00012.jpg', alt: 'Migas Rancheras' }, // Migas Rancheras
-  { src: '/platos/Image00017.jpg', alt: 'Assortment of Mexican Dishes' }, // Mesa con varios platos
+  { src: '/platos/IMG_0025.jpg', alt: 'Menudo' }, // Menudo
+  { src: '/platos/IMG_0035.jpg', alt: 'Tacos al Pastor Plate' }, // Plato Pastor
+  { src: '/platos/IMG_0044.jpg', alt: 'Chilaquiles Plate' }, // Plato Chilaquiles
+  { src: '/platos/IMG_0055.jpg', alt: 'Enchilada' }, // Enchilada closeup
+  { src: '/platos/IMG_0048.jpg', alt: 'Migas Rancheras' }, // Migas Rancheras
+  { src: '/platos/IMG_0094.jpg', alt: 'Assortment of Mexican Dishes' }, // Mesa con varios platos
 ];
 
 export default function GallerySection({ lang, dict }) {
