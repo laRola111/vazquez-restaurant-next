@@ -4,28 +4,32 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// NOTE: Ruta a la imagen del collage. Debes guardar esta imagen en public/images/
-const collageImage = '/images/vazquez-collage.png'; // Cambia el nombre si es necesario
+// FIX: Ruta a la nueva imagen decorativa
+const collageImage = '/images/decorative-collage.jpg'; // Asegúrate que este archivo exista en public/images
 
 export default function DecorativeImageSection({ lang, dict }) {
+  // Usar el alt text de la sección About o uno genérico
+  const altText = dict?.about?.imageAlt || "Collage de platillos mexicanos";
+
   return (
-    // NOTE: Sección simple para mostrar la imagen, sin padding vertical extra
-    <section className="bg-background"> {/* Fondo crema */}
+    // Sección con padding vertical moderado
+    <section className="py-10 md:py-16 bg-background"> {/* Fondo crema */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
         viewport={{ once: true, amount: 0.2 }}
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10" // Padding horizontal y vertical moderado
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" // Usar max-w-7xl para ancho completo
       >
-        <div className="relative aspect-[16/7] rounded-lg overflow-hidden shadow-lg"> {/* Aspect ratio ajustado para imagen panorámica */}
+        <div className="relative aspect-[16/6] md:aspect-[16/5] rounded-lg overflow-hidden shadow-lg"> {/* Aspect ratio más panorámico */}
           <Image
-            src={collageImage}
-            alt={dict.about.imageAlt} // Reutilizamos el alt text definido en 'about'
+            src={collageImage} // Usar la nueva imagen
+            alt={altText}
             fill
-            style={{ objectFit: 'cover' }} // Cubrirá el contenedor
-            sizes="(max-width: 1024px) 100vw, 1024px" // Tamaños responsivos
+            style={{ objectFit: 'cover' }}
+            sizes="100vw" // La imagen ocupa casi todo el ancho
             quality={80}
+            loading="lazy" // Carga diferida ya que está más abajo en la página
           />
         </div>
       </motion.div>
