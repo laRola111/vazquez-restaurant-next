@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 
 // NOTE: Seleccionamos 4 imágenes representativas de la carpeta /public/platos
 const galleryImages = [
-  { src: '/platos/IMG_0100.jpeg', alt: 'Tacos crujientes' },
-  { src: '/platos/IMG_0035.jpeg', alt: 'Burrito Mi Tierra' },
-  { src: '/platos/IMG_0087.jpeg', alt: 'Nachos de Fajita' }, // (Imagen parece Migas, revisar)
-  { src: '/platos/IMG_0102.jpeg', alt: 'Mexican Steak' },
+  { src: '/platos/Image00005.jpg', alt: 'Tacos crujientes' }, // (Original)
+  { src: '/platos/IMG_0044.jpeg', alt: 'Tacos de Barbacoa' },
+  { src: '/platos/Image00010.jpg', alt: 'Nachos de Fajita' }, // (Original)
+  { src: '/platos/27.jpg', alt: 'Mexican Steak' },          // (Original)
 ];
 
 export default function DecorativeImageSection({ lang, dict }) {

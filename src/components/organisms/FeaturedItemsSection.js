@@ -7,10 +7,11 @@ import { motion } from 'framer-motion';
 
 // Definir platillos destacados y sus imágenes (ajusta nombres e imágenes según tu carpeta 'platos')
 const featured = [
-  { nameKey: 'item1Name', image: '/platos/IMG_0048.jpeg', link: '/menu/lunch-dinner?q=Menudo' }, // Menudo (Imagen parece Pastor, revisar)
-  { nameKey: 'item2Name', image: '/platos/IMG_0094.jpeg', link: '/menu/breakfast?q=Chilaquiles' }, // Chilaquiles
-  { nameKey: 'item3Name', image: '/platos/IMG_0048.jpeg', link: '/menu/lunch-dinner?q=Pastor' }, // Tacos al Pastor
-  { nameKey: 'item4Name', image: '/platos/IMG_0044.jpeg', link: '/menu/lunch-dinner?q=Enchiladas' }, // Enchiladas
+  // FIX: Rutas actualizadas con imágenes más específicas/originales
+  { nameKey: 'item1Name', image: '/platos/Image00013.jpg', link: '/menu/lunch-dinner?q=Menudo' }, // Menudo (Original)
+  { nameKey: 'item2Name', image: '/platos/Image00021.jpg', link: '/menu/breakfast?q=Chilaquiles' }, // Chilaquiles (Original)
+  { nameKey: 'item3Name', image: '/platos/IMG_0048.jpeg', link: '/menu/lunch-dinner?q=Pastor' }, // Pastor (Imagen parece Menudo, revisar)
+  { nameKey: 'item4Name', image: '/platos/28.jpg', link: '/menu/lunch-dinner?q=Enchiladas' }, // Enchiladas (Original closeup)
 ];
 
 // Componente para cada tarjeta de platillo

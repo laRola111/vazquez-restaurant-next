@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 // FIX: Actualizar ruta de imagen si cambió (parece que ahora es .jpeg)
-import heroImage from "../../../public/platos/IMG_0025.jpeg"; // antes era .png
+import heroImage from "../../../public/platos/IMG_0025.png"; // antes era .png
 
 export default function HeroSection({ lang, dict }) {
   const menuLink = `/${lang}/menu/lunch-dinner`;

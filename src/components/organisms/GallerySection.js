@@ -6,12 +6,12 @@ import { motion } from 'framer-motion';
 
 // NOTE: Selección de 6 imágenes de la carpeta /public/platos para la galería principal
 const galleryImages = [
-  { src: '/platos/IMG_0048.jpeg', alt: 'Menudo' }, // (Imagen parece Pastor, revisar)
-  { src: '/platos/IMG_0048.jpeg', alt: 'Tacos al Pastor Plate' },
-  { src: '/platos/IMG_0094.jpeg', alt: 'Chilaquiles Plate' },
-  { src: '/platos/IMG_0044.jpeg', alt: 'Enchilada' },
-  { src: '/platos/IMG_0087.jpeg', alt: 'Migas Rancheras' }, // (Imagen parece Migas normales, revisar)
-  { src: '/platos/IMG_0025.jpeg', alt: 'Quesabirria Tacos' }, // Reemplaza Image00017.jpg que no existe
+  { src: '/platos/IMG_0035.jpeg', alt: 'Tacos de Barbacoa' },
+  { src: '/platos/IMG_0059.jpeg', alt: 'Tacos de Barbacoa con consomé' },
+  { src: '/platos/Image00002.jpg', alt: 'Caldo de Res' }, // (Original)
+  { src: '/platos/Image00012.jpg', alt: 'Migas Rancheras' }, // Reemplaza IMG_0087.jpeg usada en Deco
+  { src: '/platos/8.jpg', alt: 'Nopalitos' }, // Reemplaza IMG_0059.jpeg repetida
+  { src: '/platos/IMG_0102.jpeg', alt: 'Margarita de Lima' },
 ];
 
 export default function GallerySection({ lang, dict }) {
