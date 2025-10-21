@@ -12,7 +12,7 @@ export default function HeroSection({ lang, dict }) {
 
   return (
     // Sección principal con fondo crema, padding ajustado y overflow hidden
-    <section id="hero" className="relative bg-background pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden">
+    <section id="hero" className="relative bg-white pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10"> {/* Contenido principal con z-10 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
 

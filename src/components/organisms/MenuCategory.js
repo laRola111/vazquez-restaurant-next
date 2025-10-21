@@ -1,7 +1,7 @@
 // src/components/organisms/MenuCategory.js
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion'; // <-- Importar AnimatePresence
+import { motion, AnimatePresence } from 'framer-motion';
 import MenuItem from './MenuItem';
 
 export default function MenuCategory({ categoryData, categoryKey }) {
@@ -17,13 +17,13 @@ export default function MenuCategory({ categoryData, categoryKey }) {
 
 
   return (
-    // Aplicar animación de entrada solo al contenedor de categoría
+    // FIX: Cambiado whileInView por animate para activar la animación al cargar
+    // FIX: Eliminado viewport ya que animate no lo necesita para este efecto simple
     <motion.div
       id={categoryKey}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={categoryContainerVariants} // Usar variante simple
+      animate="visible" // <-- CAMBIO AQUÍ
+      variants={categoryContainerVariants}
       className="mb-12 md:mb-16"
     >
       {/* Título de la Categoría */}
@@ -39,14 +39,14 @@ export default function MenuCategory({ categoryData, categoryKey }) {
       )}
 
       {/* Lista de Items en Grid */}
-      {/* FIX: Envolver el mapeo con AnimatePresence */}
+      {/* NOTE: AnimatePresence se mantiene para animaciones de salida/entrada de MenuItem si se filtran */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
         <AnimatePresence>
           {categoryData.items.map((item, index) => (
             <MenuItem
-              key={item.name || index} // La key es crucial para AnimatePresence
+              key={item.name || index}
               item={item}
-              index={index} // Podemos seguir usándolo para un delay si queremos
+              index={index}
               categoryTitle={categoryData.categoryTitle}
             />
           ))}

@@ -31,6 +31,7 @@ export const dictionary = {
     sundayTime: "7:00 am to 4:00 pm",
     contactTitle: "CONTACTO",
     locationTitle: "UBICACIÓN",
+    
   },
   featuredItems: { // <--- AÑADIDO
     title: "Nuestros Favoritos",
