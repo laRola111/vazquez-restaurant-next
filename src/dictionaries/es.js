@@ -32,6 +32,23 @@ export const dictionary = {
     contactTitle: "CONTACTO",
     locationTitle: "UBICACIÓN",
   },
+  featuredItems: { // <--- AÑADIDO
+    title: "Nuestros Favoritos",
+    item1Name: "Menudo", // Ejemplo, usa nombres reales del menú
+    item2Name: "Chilaquiles", // Ejemplo
+    item3Name: "Tacos al Pastor", // Ejemplo
+    item4Name: "Enchiladas", // Ejemplo
+    viewMenuButton: "Ver Menú Completo"
+  },
+  reviews: { // <--- AÑADIDO (Placeholder)
+      title: "Lo Que Dicen Nuestros Clientes",
+      review1: "¡La comida es deliciosa y auténtica! El servicio siempre es amable.",
+      author1: "Cliente Feliz",
+      review2: "El mejor menudo de Austin, sin duda. ¡Perfecto para la cruda!",
+      author2: "Visitante Regular",
+      review3: "Nos encantan los tacos y el ambiente familiar. ¡Muy recomendado!",
+      author3: "Familia G.",
+  },
   footer: {
     rights: 'Todos los derechos reservados.',
     quickLinks: 'Enlaces Rápidos',

@@ -1,135 +1,132 @@
 // src/components/organisms/Header.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react'; // Añadir useCallback
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import { FaSearch } from 'react-icons/fa';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
-import logo from '../../../public/logo2.png'; // Make sure this path is correct
+import logo from '../../../public/logo2.png'; // Asegúrate que la ruta es correcta
 
 export default function Header({ lang, dict }) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  // --- Estados ---
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastYPos, setLastYPos] = useState(0);
 
-  // Read the current query param value ONCE per render for initialization
-  const initialQueryParamValue = searchParams.get('q') || '';
-  const [localSearchTerm, setLocalSearchTerm] = useState(initialQueryParamValue);
+  // FIX: Leer el valor 'q' directamente para inicializar y usar como dependencia estable
+  const currentQueryParamValue = searchParams.get('q') || '';
+  const [localSearchTerm, setLocalSearchTerm] = useState(currentQueryParamValue);
 
   const isMenuPage = pathname.includes('/menu/');
 
   // --- Effects ---
-  // Visibility effect
+  // Visibilidad al hacer scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentYPos = window.scrollY;
-      const isScrollingUp = currentYPos < lastYPos;
-      setIsVisible(isScrollingUp || currentYPos < 50);
+      setIsVisible(currentYPos < 50 || currentYPos < lastYPos);
       setLastYPos(currentYPos);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastYPos]);
 
-  // Close menu effect
-  useEffect(() => { if (isMenuOpen) setIsMenuOpen(false); }, [pathname, isMenuOpen]);
+  // Cerrar menú móvil al cambiar ruta
+  useEffect(() => { setIsMenuOpen(false); }, [pathname]);
 
-  // Scroll lock effect
-  useEffect(() => { document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; return () => { document.body.style.overflow = 'auto'; }; }, [isMenuOpen]);
+  // Bloquear scroll del body con menú móvil abierto
+  useEffect(() => { document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto'; }, [isMenuOpen]);
 
-  // FIX: Effect to sync input with URL param 'q' - Depend on the actual value from searchParams.get()
+  // FIX: Sincronizar input con URL (dependencia estable)
   useEffect(() => {
-      const qParamValue = searchParams.get('q') || '';
-      // Only update local state if it differs from the URL param
-      if (qParamValue !== localSearchTerm) {
-         setLocalSearchTerm(qParamValue);
-      }
-      // Depend directly on the result of searchParams.get('q')
-      // Also depend on pathname in case navigation clears the param implicitly
-  }, [searchParams.get('q'), pathname]);
-
-
-  const navLinks = [
-    // Ensure dict is defined before accessing its properties
-    { name: dict?.home || 'Home', href: `/${lang}/` },
-    { name: dict?.breakfast || 'Breakfast', href: `/${lang}/menu/breakfast` },
-    { name: dict?.lunchDinner || 'Lunch & Dinner', href: `/${lang}/menu/lunch-dinner` },
-    { name: dict?.drinks || 'Drinks', href: `/${lang}/menu/drinks` },
-  ];
-
-  const handleLinkClick = (e, href) => {
-    // Basic link click handling + close menu
-    if (href.includes('#')) {
-      // Handle scroll if needed, omitted for brevity as it wasn't the issue
+    // Actualiza el input solo si el parámetro URL realmente cambió
+    if (currentQueryParamValue !== localSearchTerm) {
+      setLocalSearchTerm(currentQueryParamValue);
     }
-    setIsMenuOpen(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQueryParamValue]); // Depender solo del valor string
 
-  const handleSearchChange = (e) => {
+  // --- Links de Navegación (con verificación de dict) ---
+  const navLinks = dict ? [
+    { name: dict.navbar?.home || 'Home', href: `/${lang}/` },
+    { name: dict.navbar?.breakfast || 'Breakfast', href: `/${lang}/menu/breakfast` },
+    { name: dict.navbar?.lunchDinner || 'Lunch & Dinner', href: `/${lang}/menu/lunch-dinner` },
+    { name: dict.navbar?.drinks || 'Drinks', href: `/${lang}/menu/drinks` },
+  ] : [];
+
+  // --- Manejadores ---
+  const handleLinkClick = useCallback(() => setIsMenuOpen(false), []); // Simple cierre
+
+  // Actualiza URL mientras se escribe (solo en páginas de menú)
+  const handleSearchChange = useCallback((e) => {
     const newSearchTerm = e.target.value;
-    setLocalSearchTerm(newSearchTerm); // Update input field
+    setLocalSearchTerm(newSearchTerm);
 
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
-    const termToUse = newSearchTerm.trim();
-
-    if (!termToUse) {
-      current.delete('q');
-    } else {
-      current.set('q', termToUse);
+    if (isMenuPage) { // Solo actualiza URL si ya estamos en menú
+      const current = new URLSearchParams(Array.from(searchParams.entries()));
+      const termToUse = newSearchTerm.trim();
+      if (!termToUse) {
+        current.delete('q');
+      } else {
+        current.set('q', termToUse);
+      }
+      const search = current.toString();
+      const query = search ? `?${search}` : "";
+      router.replace(`${pathname}${query}`); // Actualiza query param
     }
-    const search = current.toString();
-    const query = search ? `?${search}` : "";
+  }, [isMenuPage, pathname, router, searchParams]);
 
-    if (isMenuPage) {
-      router.replace(`${pathname}${query}`); // Use replace for filtering effect
-    }
-    // Don't auto-redirect from non-menu pages while typing
-  };
-
-   const handleSearchSubmit = (e) => {
+  // Navega o actualiza URL al presionar Enter
+  const handleSearchSubmit = useCallback((e) => {
     if (e.key === 'Enter') {
-        const termToUse = localSearchTerm.trim();
-         if (!isMenuPage && termToUse) { // If on home page and submitting search
-            const current = new URLSearchParams();
-            current.set('q', termToUse);
-            const query = `?${current.toString()}`;
-            router.push(`/${lang}/menu/lunch-dinner${query}`); // Navigate to main menu page
-         } else if (isMenuPage) { // If already on menu page, ensure URL is updated
-             handleSearchChange({ target: { value: localSearchTerm } });
-         }
-         e.preventDefault();
+      e.preventDefault();
+      const termToUse = localSearchTerm.trim();
+      const current = new URLSearchParams();
+      if (termToUse) {
+        current.set('q', termToUse);
+      }
+      const search = current.toString();
+      const query = search ? `?${search}` : "";
+
+      if (!isMenuPage && termToUse) { // Desde Home u otra página -> Navegar a menú principal
+        router.push(`/${lang}/menu/lunch-dinner${query}`);
+      } else if (isMenuPage) { // Si ya estamos en menú -> Asegurar que URL esté actualizada (replace)
+        router.replace(`${pathname}${query}`);
+      }
+      // Opcional: Cerrar menú móvil si estaba abierto
+      setIsMenuOpen(false);
     }
-   };
+  }, [isMenuPage, lang, localSearchTerm, pathname, router]);
+
 
   return (
     <>
       <header
         className={`sticky top-0 z-40 w-full bg-background/95 backdrop-blur-sm border-b border-secondary/10 shadow-sm transition-transform duration-300 ease-in-out ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
-        } `}
+        }`}
       >
         <nav className="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20">
-          <Link href={`/${lang}`} className="flex-shrink-0 flex items-center">
-            {/* Ensure logo path is correct */}
+          {/* Logo */}
+          <Link href={`/${lang}`} className="flex-shrink-0">
             <Image src={logo} alt="Vazquez Restaurant #3 Logo" height={50} className="w-auto" priority />
           </Link>
 
-          {/* Desktop Nav + Search */}
+          {/* Navegación Desktop + Buscador */}
           <div className="hidden md:flex items-center space-x-6">
-            {/* Render links only if dict is loaded */}
-            {dict && navLinks.map((link) => (
-              <Link key={link.name} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-base font-semibold text-secondary hover:text-primary transition-colors">
+            {navLinks.map((link) => (
+              <Link key={link.name} href={link.href} onClick={handleLinkClick} className="text-base font-semibold text-secondary hover:text-primary transition-colors">
                 {link.name}
               </Link>
             ))}
-            {/* Search Input */}
+            {/* Buscador */}
             <div className="relative ml-4">
               <input
                 type="text"
@@ -137,15 +134,16 @@ export default function Header({ lang, dict }) {
                 value={localSearchTerm}
                 onChange={handleSearchChange}
                 onKeyDown={handleSearchSubmit}
+                aria-label="Buscar en el menú"
                 className="px-4 py-1.5 pl-8 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent w-40 md:w-48 lg:w-56"
               />
-              <FaSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-muted text-sm" />
+              <FaSearch className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-muted text-sm pointer-events-none" /> {/* Evita que el icono interfiera */}
             </div>
           </div>
 
-          {/* Right side buttons */}
+          {/* Botones Derecha */}
           <div className="flex items-center space-x-4">
-             <div className="hidden md:block"> <LanguageSwitcher /> </div>
+            <div className="hidden md:block"> <LanguageSwitcher /> </div>
             <button className="md:hidden text-secondary hover:text-primary z-50" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
               {isMenuOpen ? <HiOutlineX size={28} /> : <HiOutlineMenu size={28} />}
             </button>
@@ -153,14 +151,14 @@ export default function Header({ lang, dict }) {
         </nav>
       </header>
 
-      {/* Mobile Menu Panel */}
+      {/* Panel Menú Móvil */}
       <div
         className={`fixed inset-0 bg-background z-30 transform transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full pt-20 space-y-8">
-          {/* Mobile Search Input */}
+          {/* Buscador Móvil */}
           <div className="relative w-4/5 max-w-xs mb-4">
              <input
                type="text"
@@ -168,13 +166,14 @@ export default function Header({ lang, dict }) {
                value={localSearchTerm}
                onChange={handleSearchChange}
                onKeyDown={handleSearchSubmit}
+               aria-label="Buscar en el menú"
                className="w-full px-5 py-2.5 pl-10 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
              />
-             <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted text-base" />
+             <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted text-base pointer-events-none" />
            </div>
-          {/* Mobile Nav Links */}
-          {dict && navLinks.map((link) => (
-            <Link key={link.name} href={link.href} onClick={(e) => handleLinkClick(e, link.href)} className="text-2xl font-semibold text-secondary hover:text-primary transition-colors">
+          {/* Enlaces Móviles */}
+          {navLinks.map((link) => (
+            <Link key={link.name} href={link.href} onClick={handleLinkClick} className="text-2xl font-semibold text-secondary hover:text-primary transition-colors">
               {link.name}
             </Link>
           ))}

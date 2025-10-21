@@ -32,6 +32,23 @@ export const dictionary = {
     contactTitle: "CONTACT",
     locationTitle: "LOCATION",
   },
+  featuredItems: { // <--- ADDED
+    title: "Our Favorites",
+    item1Name: "Menudo", // Example, use real menu item names
+    item2Name: "Chilaquiles", // Example
+    item3Name: "Tacos al Pastor", // Example
+    item4Name: "Enchiladas", // Example
+    viewMenuButton: "View Full Menu"
+  },
+  reviews: { // <--- ADDED (Placeholder)
+      title: "What Our Customers Say",
+      review1: "The food is delicious and authentic! Service is always friendly.",
+      author1: "Happy Customer",
+      review2: "Best menudo in Austin, hands down. Perfect hangover cure!",
+      author2: "Regular Visitor",
+      review3: "We love the tacos and the family atmosphere. Highly recommended!",
+      author3: "The G. Family",
+  },
   footer: {
     rights: 'All rights reserved.',
     quickLinks: 'Quick Links',
