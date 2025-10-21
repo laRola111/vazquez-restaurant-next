@@ -1,11 +1,11 @@
 // src/app/[lang]/page.js
 import { getDictionary } from '@/lib/dictionaries';
 import HeroSection from '@/components/organisms/HeroSection';
-import HoursContactSection from '@/components/organisms/HoursContactSection';
 import AboutSection from '@/components/organisms/AboutSection';
-import DecorativeImageSection from '@/components/organisms/DecorativeImageSection'; // Re-importar si se usa
-import FeaturedItemsSection from '@/components/organisms/FeaturedItemsSection'; // Importar nueva sección
-import ReviewsSection from '@/components/organisms/ReviewsSection'; // Importar sección reseñas
+import FeaturedItemsSection from '@/components/organisms/FeaturedItemsSection'; // Importar
+import HoursContactSection from '@/components/organisms/HoursContactSection';
+// import DecorativeImageSection from '@/components/organisms/DecorativeImageSection'; // Opcional
+// import ReviewsSection from '@/components/organisms/ReviewsSection'; // Opcional
 
 export default async function HomePage({ params: { lang } }) {
   const dict = await getDictionary(lang);
@@ -14,9 +14,10 @@ export default async function HomePage({ params: { lang } }) {
     <>
       <HeroSection lang={lang} dict={dict.hero} />
       <AboutSection lang={lang} dict={dict.about} />
-      <FeaturedItemsSection lang={lang} dict={dict.featuredItems} /> 
-     <HoursContactSection lang={lang} dict={dict.hoursContact} />
-      <ReviewsSection lang={lang} dict={dict.reviews} /> 
+      {/* <DecorativeImageSection lang={lang} dict={dict} /> */} {/* Opcional: Poner collage aquí */}
+      <FeaturedItemsSection lang={lang} dict={dict.featuredItems} /> {/* Incluir sección */}
+      <HoursContactSection lang={lang} dict={dict.hoursContact} />
+      {/* <ReviewsSection lang={lang} dict={dict.reviews} /> */} {/* Opcional: Reseñas al final */}
     </>
   );
 }
