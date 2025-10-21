@@ -1,13 +1,25 @@
 // src/dictionaries/es.js
 export const dictionary = {
-  navbar: { // Placeholder for navigation links
+  navbar: {
     home: 'Inicio',
     breakfast: 'Desayunos',
     lunchDinner: 'Almuerzos y Cenas',
     drinks: 'Bebidas',
-    contact: 'Contacto',
+    contact: 'Contacto', // Mantenido por si se usa en otro lugar
   },
-  hoursContact: { // <-- NUEVA SECCIÓN
+  hero: {
+    title: "Bienvenidos a Vázquez Restaurant #3",
+    subtitle: "Desde 2001, sirviendo platillos tradicionales hechos con amor. Tacos, enchiladas, menudo y más.",
+    button: "Ver Menú Completo",
+    imageAlt: "Restaurante mexicano sirviendo comida tradicional",
+  },
+  about: {
+    since: "Desde 2001",
+    mainText: "Todo hecho con amor",
+    description: "Explora nuestra selección de tacos, enchiladas, gorditas, menudo y más, cada uno elaborado para llevar un sabor auténtico de México a tu mesa e inspirar una sensación de alegría y conexión.",
+    imageAlt: "Collage de platillos mexicanos", // Alt para imagen decorativa o mascota
+  },
+  hoursContact: {
     title: "Hours - Horas",
     mondayWed: "Lunes a Miércoles",
     mondayWedTime: "6:00 am to 3:00 pm",
@@ -20,25 +32,13 @@ export const dictionary = {
     contactTitle: "CONTACTO",
     locationTitle: "UBICACIÓN",
   },
- footer: {
+  footer: {
     rights: 'Todos los derechos reservados.',
-    quickLinks: 'Enlaces Rápidos', // <-- AÑADIDO
-    contactInfo: 'Información de Contacto', // <-- AÑADIDO
-    followUs: 'Síguenos', // <-- AÑADIDO
+    quickLinks: 'Enlaces Rápidos',
+    contactInfo: 'Información de Contacto',
+    followUs: 'Síguenos',
   },
- hero: {
-    title: "Bienvenidos a Vázquez Restaurant #3", // <-- ACTUALIZADO (con acento según imagen)
-    subtitle: "Desde 2001, sirviendo platillos tradicionales hechos con amor. Tacos, enchiladas, menudo y más.", // <-- ACTUALIZADO (quitando moles/grilled, añadiendo menudo)
-    button: "Ver Menú Completo",
-    imageAlt: "Restaurante mexicano sirviendo comida tradicional", // <-- ACTUALIZADO
-  },
-  about: { // <-- NUEVA SECCIÓN
-    since: "Desde 2001",
-    mainText: "Todo hecho con amor",
-    description: "Explora nuestra selección de tacos, enchiladas, gorditas, menudo y más, cada uno elaborado para llevar un sabor auténtico de México a tu mesa e inspirar una sensación de alegría y conexión.", // <-- Texto ajustado
-    imageAlt: "Collage de platillos mexicanos", // Alt para la imagen decorativa
-  },
- menu: {
+  menu: {
     // --- Desayunos ---
     breakfastTacos: {
       categoryTitle: 'Tacos de Desayuno',
@@ -66,14 +66,14 @@ export const dictionary = {
       categoryTitle: 'Platillos de Desayuno',
       note: 'Todos los platillos vienen con dos tortillas o una orden de pan tostado. Chips $2 antes de las 11:00 AM.',
       items: [
-        { name: 'CLASSIC BREAKFAST', description: 'Dos huevos (cualquier estilo) con elección de: jamón, tocino, salchicha o chorizo, servido con frijoles y papas.', price: 12.00 },
-        { name: 'HUEVOS RANCHEROS', description: 'Dos huevos (cualquier estilo) bañados en salsa ranchera, con elección de tocino, salchicha o jamón, servido con papas y frijoles.', price: 12.00 },
-        { name: 'HUEVOS DIVORCIADOS', description: 'Dos huevos (cualquier estilo), uno bañado en salsa verde y otro en salsa roja, servido con frijoles y papas.', price: 15.00 },
-        { name: 'NOPALITOS', description: 'Nopalitos frescos mezclados con dos huevos, servido con frijoles y papas.', price: 13.00 },
+        { name: 'CLASSIC BREAKFAST', description: 'Dos huevos (cualquier estilo) con elección de: jamón, tocino, salchicha o chorizo, servido con frijoles y papas.', price: 12.00, image: 'eggs.jpg' },
+        { name: 'HUEVOS RANCHEROS', description: 'Dos huevos (cualquier estilo) bañados en salsa ranchera, con elección de tocino, salchicha o jamón, servido con papas y frijoles.', price: 12.00, image: 'Image00019.jpg' },
+        { name: 'HUEVOS DIVORCIADOS', description: 'Dos huevos (cualquier estilo), uno bañado en salsa verde y otro en salsa roja, servido con frijoles y papas.', price: 15.00, image: 'eggs-separated.jpg' },
+        { name: 'NOPALITOS', description: 'Nopalitos frescos mezclados con dos huevos, servido con frijoles y papas.', price: 13.00, image: 'Image00008.jpg' },
         { name: 'FAJITA AND EGG', description: 'Dos huevos (cualquier estilo) con fajita, servido con frijoles y papas.', price: 17.00 },
-        { name: 'MIGAS RANCHERAS', description: 'Dos huevos revueltos con totopos, jalapeños frescos picados, cebolla y tomate, bañados en salsa ranchera y queso, servido con frijoles y papas.', price: 13.00 },
-        { name: 'MIGAS', description: 'Dos huevos revueltos con totopos, jalapeños picados, cebolla y tomate, servido con frijoles y papas.', price: 12.00 },
-        { name: 'CHILAQUILES', description: 'Totopos caseros y salsa, cubiertos con queso fresco, servido con dos huevos y elección de frijoles o papas.', price: 13.00, addBarbacoa: '$6 extra', addFajita: '$7 extra' },
+        { name: 'MIGAS RANCHERAS', description: 'Dos huevos revueltos con totopos, jalapeños frescos picados, cebolla y tomate, bañados en salsa ranchera y queso, servido con frijoles y papas.', price: 13.00, image: 'Image00012.jpg' },
+        { name: 'MIGAS', description: 'Dos huevos revueltos con totopos, jalapeños picados, cebolla y tomate, servido con frijoles y papas.', price: 12.00, image: 'Image00011.jpg' },
+        { name: 'CHILAQUILES', description: 'Totopos caseros y salsa, cubiertos con queso fresco, servido con dos huevos y elección de frijoles o papas.', price: 13.00, addBarbacoa: '$6 extra', addFajita: '$7 extra', image: 'Image00021.jpg' },
         { name: 'VAZQUEZ DELUXE', description: 'Dos huevos (cualquier estilo), con elección de picadillo, barbacoa o chicharron, servido con frijoles y papas.', price: 16.00 },
         { name: 'PANCAKE MEAL', description: '2 pancakes, 2 huevos, y elección de jamón, tocino o salchicha, servido con papas.', price: 13.00 },
       ]
@@ -101,7 +101,7 @@ export const dictionary = {
             { name: 'CHICHARRON', description: '(Pork skin in spicy red sauce)', price: 4.50 },
             { name: 'CHICKEN RICE', description: '(spice shredded chicken and rice)', price: 4.50 },
             { name: 'ADOBADO', description: '(pork with red sauce)', price: 4.50 },
-            { name: 'SOFT TACO', description: '(ground beef, lettuce, tomatoe and cheese)', price: 5.00 },
+            { name: 'SOFT TACO', description: '(ground beef, lettuce, tomatoe and cheese)', price: 5.00, image: 'Image00005.jpg' }, // Imagen de crispy taco usada como ejemplo
             { name: 'TACO MADRE!', description: '(Beef fajita, bell pepper, onions, lettuce, tomato, guacamole, and cheese)', price: 7.00 },
         ]
     },
@@ -116,7 +116,7 @@ export const dictionary = {
             { name: 'ADOBADO', price: 6.00 },
             { name: 'BARBACOA', price: 6.50 },
             { name: 'CHICKEN OR BEEF FAJITA', price: 6.75 },
-            { name: 'STEAK', price: 6.50 }, // Asumiendo 'STREAK' es 'STEAK'
+            { name: 'STEAK', price: 6.50 },
             { name: 'PASTOR', price: 6.50 },
             { name: 'GORDIBUENA', price: 6.00 },
         ]
@@ -124,7 +124,7 @@ export const dictionary = {
     enchiladasPlates: {
         categoryTitle: 'Enchiladas',
         items: [
-            { name: 'ENCHILADAS (BEEF, CHEESE OR CHICKEN)', description: 'Dos enchiladas, servido con arroz y frijoles.', price: 13.00 },
+            { name: 'ENCHILADAS (BEEF, CHEESE OR CHICKEN)', description: 'Dos enchiladas, servido con arroz y frijoles.', price: 13.00, image: '28.jpg' },
             { name: 'ENCHILADAS VERDES', description: 'Dos enchiladas de pollo bañadas en salsa tomatillo y queso blanco, servido con arroz y frijoles.', price: 13.00 },
             { name: 'FAJITA ENCHILADAS', description: 'Dos enchiladas servido con arroz y frijoles.', price: 15.00 },
             { name: 'CHILE CON QUESO FAJITA ENCHILADAS', description: 'Dos enchiladas servido con arroz, frijoles y tortilla.', price: 16.00 },
@@ -137,7 +137,7 @@ export const dictionary = {
         categoryTitle: 'Almuerzos y Cenas',
         note: 'Salsa y Chips son cortesía para clientes cenando en el restaurante.',
         items: [
-            { name: 'MEXICAN STEAK', description: 'Tiras tiernas de bistec, asadas con cebolla, chiles serranos y tomate, servido con arroz, frijoles, ensalada de guacamole y dos tortillas.', price: 18.00 },
+            { name: 'MEXICAN STEAK', description: 'Tiras tiernas de bistec, asadas con cebolla, chiles serranos y tomate, servido con arroz, frijoles, ensalada de guacamole y dos tortillas.', price: 18.00, image: '27.jpg' },
             { name: 'ARRE! BURRITO', description: 'Tortilla grande de harina rellena de fajita, lechuga, tomate, jalapeños, guacamole, crema agria y queso, servido con arroz y frijoles.', price: 15.00 },
             { name: 'BARBACOA', description: 'Servido con arroz, frijoles, pico de gallo y dos tortillas.', price: 16.00 },
             { name: 'CHICHARRON', description: 'Piel de cerdo en salsa picante, servido con arroz, frijoles, ensalada y dos tortillas.', price: 14.00 },
@@ -146,15 +146,15 @@ export const dictionary = {
             { name: 'RICKY\'S PLATE', description: '2 Tacos de Fajita con lechuga, tomate, guacamole y queso.', price: 18.00 },
             { name: 'ADOBADO', description: 'Trozos de cerdo tierno cocidos a fuego lento en salsa roja, servido con frijoles, arroz, ensalada y dos tortillas.', price: 15.00 },
             { name: 'CARNE GUISADA', description: 'Trozos de res tierna cocidos a fuego lento en salsa especial con papas, servido con arroz, frijoles, ensalada y dos tortillas.', price: 15.00 },
-            { name: 'AL PASTOR', description: 'Cerdo marinado, servido con arroz, frijoles, cilantro, cebolla y dos tortillas.', price: 16.00 },
+            { name: 'AL PASTOR', description: 'Cerdo marinado, servido con arroz, frijoles, cilantro, cebolla y dos tortillas.', price: 16.00, image: 'Image00009.jpg' },
             { name: 'BEEF OR CHICKEN FAJITA', description: 'Asado con pimiento morrón y cebolla, servido con arroz, frijoles y guarnición de guacamole, crema agria, pico de gallo y dos tortillas.', price: 20.00 },
             { name: 'FIESTA FAJITAS', description: 'Fajitas mixtas (pollo y res) con salchicha, pimiento morrón y cebolla asados, chile toreado, servido con arroz y frijoles charros y guarnición de guacamole, crema agria, pico de gallo, queso y dos tortillas.', price: 22.00 },
-            { name: 'MI TIERRA BURRITO', description: 'Tortilla grande de harina rellena de adobado picante (cerdo) y arroz, bañada en salsa de adobado, queso blanco, crema agria, rodajas de aguacate, servido con arroz y frijoles.', price: 15.00 },
+            { name: 'MI TIERRA BURRITO', description: 'Tortilla grande de harina rellena de adobado picante (cerdo) y arroz, bañada en salsa de adobado, queso blanco, crema agria, rodajas de aguacate, servido con arroz y frijoles.', price: 15.00, image: 'Image00018.jpg' },
             { name: 'VAZQUEZ BURRITO', description: 'Tortilla grande de harina rellena de carne molida, pico de gallo, bañada en gravy y queso, servido con arroz y frijoles.', price: 14.00 },
-            { name: 'CRISPY TACO PLATE (3)', description: '3 tacos crujientes con lechuga, tomate, queso, servido con arroz y frijoles.', price: 13.00 },
+            { name: 'CRISPY TACO PLATE (3)', description: '3 tacos crujientes con lechuga, tomate, queso, servido con arroz y frijoles.', price: 13.00, image: 'Image00005.jpg' }, // Reusando imagen
             { name: 'GORDITA PLATE (2)', description: 'Tortilla gruesa de maíz hecha a mano, rellena con elección de: picadillo, barbacoa, chicharron o adobado, lechuga y tomate, servido con arroz y frijoles.', price: 16.00 },
             { name: 'FAJITA OR STEAK GORDITA PLATE', description: 'Servido con lechuga y tomate, servido con arroz y frijoles.', price: 20.00 },
-            { name: 'CALDO DE RES', description: 'Sopa de res con vegetales, servido con arroz y guarnición de jalapeños frescos, cebolla y lima.', priceLg: 16.00, priceSm: 14.00, sizeNote: '(Lg 32oz) (Sm 20oz.)' },
+            { name: 'CALDO DE RES', description: 'Sopa de res con vegetales, servido con arroz y guarnición de jalapeños frescos, cebolla y lima.', priceLg: 16.00, priceSm: 14.00, sizeNote: '(Lg 32oz) (Sm 20oz.)', image: 'Image00002.jpg' },
         ]
     },
     // --- Aperitivos y Otros ---
@@ -162,8 +162,8 @@ export const dictionary = {
         categoryTitle: 'Aperitivos',
         items: [
             { name: 'CHILE CON QUESO', priceLg: 6.00, priceSm: 4.00, sizeNote: '(Lg. 8 oz.) (Sm. 4 oz.)' },
-            { name: 'GUACAMOLE WITH PICO DE GALLO', price: 6.00, sizeNote: '(SMALL)' }, // Asumiendo que $6 es para el pequeño
-            { name: 'FAJITA NACHOS (8)', description: 'Elección de res o pollo, cubiertos con frijoles y queso, servido con crema agria, guacamole y jalapeño al lado.', price: 15.00 },
+            { name: 'GUACAMOLE WITH PICO DE GALLO', price: 6.00, sizeNote: '(SMALL)' },
+            { name: 'FAJITA NACHOS (8)', description: 'Elección de res o pollo, cubiertos con frijoles y queso, servido con crema agria, guacamole y jalapeño al lado.', price: 15.00, image: 'Image00010.jpg' },
             { name: 'DELUXE NACHOS (8)', description: 'Cubiertos con frijoles, carne molida, queso, tomate, jalapeño, guacamole y crema agria.', price: 13.00 },
             { name: 'BEAN AND CHEESE NACHOS', price: 10.00 },
             { name: 'FAJITA QUESADILLA', description: 'Elección de res o pollo, servido con ensalada de guacamole.', price: 15.00 },
@@ -181,7 +181,7 @@ export const dictionary = {
     soupsAndMore: {
         categoryTitle: 'Sopas y Más',
         items: [
-            { name: 'MENUDO (PARA CURAR LA CRUDA)', description: 'Caldo casero de pancita de res con maíz pozolero y guarnición de jalapeño, cebolla, lima y dos tortillas.', priceLg: 16.00, priceSm: 13.00, sizeNote: 'LARGE 32oz / SMALL 20 oz' },
+            { name: 'MENUDO (PARA CURAR LA CRUDA)', description: 'Caldo casero de pancita de res con maíz pozolero y guarnición de jalapeño, cebolla, lima y dos tortillas.', priceLg: 16.00, priceSm: 13.00, sizeNote: 'LARGE 32oz / SMALL 20 oz', image: 'Image00013.jpg' },
             { name: 'BARBACOA (POR LIBRA)', description: '(8 Tortillas y guarnición de pico de gallo)', price: 22.00 },
             { name: 'FAJITAS (POR LIBRA)', description: '(8 Tortillas y guarnición de pico de gallo)', price: 25.00 },
         ]
@@ -213,7 +213,7 @@ export const dictionary = {
             { name: 'FLAUTAS', price: 13.00 },
             { name: 'TOSTADAS', price: 13.00 },
             { name: 'TORTAS', price: 11.00 },
-            { name: 'STREET TACOS', price: 13.00 },
+            { name: 'STREET TACOS', price: 13.00, image: 'Image00007.jpg' }, // Ejemplo de imagen
         ]
     },
     // --- Bebidas ---
@@ -222,7 +222,7 @@ export const dictionary = {
         items: [
             { name: 'MEXICAN COCA-COLA', price: 4.00 }, { name: 'TOPO CHICO', price: 4.00 }, { name: 'JARRITOS', price: 4.00 },
             { name: 'SODAS DE BOTELLA (16.9 oz)', price: 3.50 }, { name: 'SODA DE LATA (12 oz)', price: 2.00 },
-            { name: 'AGUA DE BOTELLA (16.9 oz)', price: 2.00 }, { name: 'TÉ HELADO (En Restaurante)', price: 3.00 }, // Asumiendo precio $3 por posición
+            { name: 'AGUA DE BOTELLA (16.9 oz)', price: 2.00 }, { name: 'TÉ HELADO (En Restaurante)', price: 3.00 },
             { name: 'JUGO DE NARANJA', price: 4.00 }, { name: 'JUGO DE MANZANA', price: 4.00 },
             { name: 'CAFÉ', price: 3.00 }, { name: 'LECHE CON CHOCOLATE', price: 4.00 },
         ]
@@ -254,7 +254,7 @@ export const dictionary = {
      // --- Menú Infantil ---
     childMenu: {
         categoryTitle: 'Menú Infantil',
-        note: '$6.00 (Menores de 10 años, mayores de 10 añadir $2)', // Ajustar redacción si es necesario
+        note: '$6.00 (Menores de 10 años, mayores de 10 añadir $2)',
         items: [
             { name: 'GAEL\'S PLATE', description: '1 huevo, papas y frijoles.' },
             { name: 'MINI CHEESE QUESADILLA', description: 'arroz y frijoles.' },
@@ -270,5 +270,4 @@ export const dictionary = {
       bonesWarning: "Barbacoa y pollo pueden contener HUESOS."
     }
   }
-  // ... (añadiremos más secciones generales de la página aquí)
 };

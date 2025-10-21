@@ -12,9 +12,9 @@ export default async function HomePage({ params: { lang } }) {
   return (
     <>
       <HeroSection lang={lang} dict={dict.hero} />
-      <HoursContactSection lang={lang} dict={dict.hoursContact} />
       <AboutSection lang={lang} dict={dict.about} />
       <DecorativeImageSection lang={lang} dict={dict} />
+      <HoursContactSection lang={lang} dict={dict.hoursContact} />
       {/* La sección del menú ya no va aquí */}
     </>
   );
