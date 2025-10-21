@@ -32,7 +32,16 @@ hero: {
     sundayTime: "7:00 am to 4:00 pm",
     contactTitle: "CONTACTO",
     locationTitle: "UBICACIÓN",
-    
+     formTitle: "Send us a Message",
+    formNamePlaceholder: "Your Name",
+    formEmailPlaceholder: "Your Email",
+    formMessagePlaceholder: "Your Message",
+    formSendButton: "Send",
+    formTitle: "Envíanos un Mensaje",
+    formNamePlaceholder: "Tu Nombre",
+    formEmailPlaceholder: "Tu Correo Electrónico",
+    formMessagePlaceholder: "Tu Mensaje",
+    formSendButton: "Enviar",
   },
   featuredItems: { // <--- AÑADIDO
     title: "Nuestros Favoritos",
