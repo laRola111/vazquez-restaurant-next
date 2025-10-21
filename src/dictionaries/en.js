@@ -16,7 +16,7 @@ export const dictionary = {
    about: {
     since: "Since 2007",
     mainTextKey: "thankYouMessage",
-    thankYouMessage: "We would like to take a moment to express our deepest gratitude to all of you. Our hearts are filled with thankfulness for choosing to dine with us and for your ongoing support of our business. Our restaurant is a family, not just a business establishment. Thank you for sharing your stories with us at every table, for your unwavering support through every challenge, and for being more than just customers to me and my children. God bless you all and your families. Gracias, muchas gracias.",
+    thankYouMessage: "We would like to take a moment to express our deepest gratitude to all of you. Our hearts are filled with thankfulness for your ongoing support of our business. Our restaurant is a family owned restaurant , not just a business establishment. Thank you for sharing your stories with us at every table, for your unwavering support through every challenge, and for being more than just customers to me and my children. God bless you all and your families. Gracias, muchas gracias. ❤️",
     description: "Our restaurant is a family, not just a business establishment. Thank you for sharing your stories.", // Descripción más corta o se puede quitar si el texto principal es suficiente
     imageAlt: "Mascota de Vazquez Restaurant #3",
   },
