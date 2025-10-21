@@ -1,50 +1,55 @@
 // src/components/organisms/MenuPageLayout.js
-'use client';
+'use client'; // Sigue siendo necesario por framer-motion
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaSearch } from 'react-icons/fa';
-import MenuDisplay from './MenuDisplay'; // <-- IMPORT MenuDisplay
+// Ya no necesitamos FaSearch ni useState
+import MenuDisplay from './MenuDisplay';
 
-export default function MenuPageLayout({ pageTitle, menuData, categoryOrder }) { // <-- ADD menuData, categoryOrder props
-  const [searchTerm, setSearchTerm] = useState('');
+// FIX: Recibe searchTerm como prop, ya no maneja estado local de búsqueda
+export default function MenuPageLayout({ pageTitle, menuData, categoryOrder, searchTerm }) {
+
+  // DEBUG: Verificar props al inicio del componente
+  // console.log("--- MenuPageLayout RECIBIDO ---");
+  // console.log("pageTitle:", pageTitle);
+  // console.log("categoryOrder:", categoryOrder); // <-- ¿Llega aquí?
+  // console.log("searchTerm:", searchTerm);
+  // console.log("-------------------------------");
+
 
   return (
-    <div className="bg-background min-h-screen">
-      {/* Cabecera (sin cambios) */}
+    <div className="bg-background min-h-screen"> {/* Fondo crema */}
+      {/* Cabecera Simplificada */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="pt-24 pb-12 bg-accent/30"
+        className="pt-24 pb-8 bg-white shadow-sm" // Menos padding, sin buscador
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary">
             {pageTitle}
           </h1>
-          <div className="relative max-w-lg mx-auto">
-            <input
-              type="text"
-              placeholder="Buscar platillo..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-5 py-3 pl-12 rounded-full border border-secondary/30 bg-white text-secondary placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
-            />
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted text-lg" />
-          </div>
+          {/* --- BUSCADOR ELIMINADO DE AQUÍ --- */}
         </div>
       </motion.div>
 
       {/* Contenedor Principal del Menú */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* FIX: Render MenuDisplay directly, passing props */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-0">
+         {/* FIX: Asegurarse de pasar todos los props necesarios a MenuDisplay */}
         <MenuDisplay
           menuData={menuData}
-          categoryOrder={categoryOrder}
-          searchTerm={searchTerm}
+          categoryOrder={categoryOrder} // Pasar el prop recibido
+          searchTerm={searchTerm} // Pasar el prop recibido
         />
       </div>
-       {/* Notas (sin cambios) */}
+
+       {/* Notas */}
+       {menuData?.notes && (
+         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 text-center text-xs text-muted/80 italic space-y-2 border-t border-secondary/10 pt-8 mt-8">
+             {menuData.notes.rawFoodWarning && <p>{menuData.notes.rawFoodWarning}</p>}
+             {menuData.notes.bonesWarning && <p>{menuData.notes.bonesWarning}</p>}
+         </div>
+       )}
     </div>
   );
 }
