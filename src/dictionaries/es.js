@@ -7,19 +7,20 @@ export const dictionary = {
     drinks: 'Bebidas',
     contact: 'Contacto', // Mantenido por si se usa en otro lugar
   },
-  hero: {
-    title: "Bienvenidos a Vázquez Restaurant #3",
-    subtitle: "Desde 2001, sirviendo platillos tradicionales hechos con amor. Tacos, enchiladas, menudo y más.",
+hero: {
+   title: "Bienvenidos a Vazquez Restaurant #3 ❤️",
+    subtitle: "Explora nuestra selección de tacos, enchiladas, gorditas, menudo y más, cada uno elaborado para llevar un sabor auténtico de México a tu mesa e inspirar una sensación de alegría y conexión.",
     button: "Ver Menú Completo",
     imageAlt: "Restaurante mexicano sirviendo comida tradicional",
   },
   about: {
-    since: "Desde 2001",
-    mainText: "Todo hecho con amor",
-    description: "Explora nuestra selección de tacos, enchiladas, gorditas, menudo y más, cada uno elaborado para llevar un sabor auténtico de México a tu mesa e inspirar una sensación de alegría y conexión.",
-    imageAlt: "Collage de platillos mexicanos", // Alt para imagen decorativa o mascota
+   since: "Desde 2007",
+    mainTextKey: "thankYouMessage",
+    thankYouMessage: "Nos gustaría tomar un momento para expresar nuestra más profunda gratitud a todos ustedes. Nuestros corazones están llenos de agradecimiento por elegir cenar con nosotros y por su continuo apoyo a nuestro negocio. Nuestro restaurante es una familia, no solo un establecimiento comercial. Gracias por compartir sus historias con nosotros en cada mesa, por su apoyo inquebrantable a través de cada desafío y por ser más que solo clientes para mí y mis hijos. Dios los bendiga a todos ustedes y a sus familias. Gracias, muchas gracias.",
+    description: "Nuestro restaurante es una familia, no solo un establecimiento comercial. Gracias por compartir sus historias.", // Descripción corta
+    imageAlt: "Mascota de Vazquez Restaurant #3",
   },
-  hoursContact: {
+    hoursContact: {
     title: "Hours - Horas",
     mondayWed: "Lunes a Miércoles",
     mondayWedTime: "6:00 am to 3:00 pm",

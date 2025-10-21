@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 const PUBLIC_FILE = /\.(.*)$/;
 const availableLanguages = ['en', 'es'];
-const defaultLanguage = 'es'; // Español como predeterminado
+const defaultLanguage = 'en'; // Español como predeterminado
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;

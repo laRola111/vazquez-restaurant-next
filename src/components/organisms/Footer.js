@@ -90,7 +90,7 @@ export default function Footer({ lang, dict }) {
            <div className="md:col-span-3 lg:col-span-1 lg:justify-self-end">
              <h3 className="text-base font-semibold text-foreground mb-4">{dict.footer.followUs || 'Follow Us'}</h3>
              <div className="flex space-x-4">
-               <SocialLink href="https://www.facebook.com/vazquezrestaurant3" icon={FaFacebookF} label="Facebook" />
+               <SocialLink href="https://www.facebook.com/share/17ZE7GfaEv/?mibextid=wwXIfr" icon={FaFacebookF} label="Facebook" />
              </div>
           </div>
         </div>

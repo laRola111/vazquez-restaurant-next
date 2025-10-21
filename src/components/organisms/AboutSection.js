@@ -1,13 +1,15 @@
 // src/components/organisms/AboutSection.js
 'use client';
 
-import Image from 'next/image'; // Importar Image
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import mascotImage from '../../../public/logo1.png'; // Importar la imagen de la mascota
+import mascotImage from '../../../public/logo1.png';
 
 export default function AboutSection({ lang, dict }) {
+  // FIX: Acceder al texto de agradecimiento usando la nueva clave mainTextKey
+  const mainText = dict[dict.mainTextKey] || dict.mainText; // Fallback al mainText anterior si falta la clave nueva
+
   return (
-    // Sección con fondo crema y padding vertical
     <section id="about" className="py-16 md:py-24 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -20,15 +22,16 @@ export default function AboutSection({ lang, dict }) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center md:text-left"
           >
-            {/* Texto "Since 2001" */}
-            <p className="font-sans text-sm font-semibold tracking-wider uppercase text-muted mb-2">
-              {dict.since}
-            </p>
-            {/* Texto principal "Todo hecho con amor" */}
+            {/* FIX: Texto "Since 2007" */}
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
-              {dict.mainText}
+              {/* NOTE: Usamos el texto obtenido del diccionario */}
+              {dict.since}
             </h2>
-            {/* Descripción */}
+            <p className="font-sans text-sm font-semibold tracking-wider uppercase text-muted mb-2">
+              {mainText}
+            </p>
+            {/* FIX: Texto principal de agradecimiento */}
+            {/* NOTE: La descripción corta puede quedarse o eliminarse */}
             <p className="font-sans text-base md:text-lg text-secondary max-w-xl mx-auto md:mx-0">
               {dict.description}
             </p>
@@ -40,14 +43,14 @@ export default function AboutSection({ lang, dict }) {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.3 }}
-            className="relative flex justify-center items-center" // Centrar la imagen
+            className="relative flex justify-center items-center"
           >
             <Image
-              src={mascotImage} // Usar la mascota importada
-              alt="Mascota de Vazquez Restaurant #3" // Alt text específico
-              width={350} // Ancho deseado (ajusta según sea necesario)
-              height={350} // Alto deseado (ajusta según sea necesario)
-              style={{ objectFit: 'contain' }} // Contener la imagen sin recortar
+              src={mascotImage}
+              alt={dict.imageAlt} // Usar alt text del diccionario
+              width={350}
+              height={350}
+              style={{ objectFit: 'contain' }}
             />
           </motion.div>
 

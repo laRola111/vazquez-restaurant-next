@@ -7,19 +7,20 @@ export const dictionary = {
     drinks: 'Drinks',
     contact: 'Contact',
   },
-  hero: {
-    title: "Welcome to Vázquez Restaurant #3",
-    subtitle: "Since 2001, serving traditional dishes made with love. Tacos, enchiladas, menudo & more.",
+   hero: {
+    title: "Welcome to Vazquez Restaurant #3 ❤️",
+    subtitle: "Explore our selection of tacos, enchiladas, gorditas, menudo and more, each crafted to bring a taste of authentic Mexico to your table, and inspire a sense of joy and connection.",
     button: "View Full Menu",
     imageAlt: "Mexican restaurant serving traditional food",
   },
-  about: {
-    since: "Since 2001",
-    mainText: "Everything done with love",
-    description: "Explore our selection of tacos, enchiladas, gorditas, menudo and more, each crafted to bring a taste of authentic Mexico to your table, and inspire a sense of joy and connection.",
-    imageAlt: "Collage of Mexican dishes",
+   about: {
+    since: "Since 2007",
+    mainTextKey: "thankYouMessage",
+    thankYouMessage: "We would like to take a moment to express our deepest gratitude to all of you. Our hearts are filled with thankfulness for choosing to dine with us and for your ongoing support of our business. Our restaurant is a family, not just a business establishment. Thank you for sharing your stories with us at every table, for your unwavering support through every challenge, and for being more than just customers to me and my children. God bless you all and your families. Gracias, muchas gracias.",
+    description: "Our restaurant is a family, not just a business establishment. Thank you for sharing your stories.", // Descripción más corta o se puede quitar si el texto principal es suficiente
+    imageAlt: "Mascota de Vazquez Restaurant #3",
   },
-  hoursContact: {
+  ontact: {
     title: "Hours - Horas",
     mondayWed: "Monday thru Wednesday",
     mondayWedTime: "6:00 am to 3:00 pm",
