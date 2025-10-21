@@ -20,7 +20,7 @@ export const dictionary = {
     description: "Our restaurant is a family, not just a business establishment. Thank you for sharing your stories.", // Descripción más corta o se puede quitar si el texto principal es suficiente
     imageAlt: "Mascota de Vazquez Restaurant #3",
   },
-  ontact: {
+  hoursContact: {
     title: "Hours - Horas",
     mondayWed: "Monday thru Wednesday",
     mondayWedTime: "6:00 am to 3:00 pm",

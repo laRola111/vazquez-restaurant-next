@@ -22,7 +22,6 @@ export default async function HomePage({ params: { lang } }) {
       <GallerySection lang={lang} dict={dict} />
       <ReviewsSection lang={lang} dict={dict.reviews} />
       <DecorativeImageSection lang={lang} dict={dict} />
-      <HoursContactSection lang={lang} dict={dict.hoursContact} />
-    </>
+<HoursContactSection lang={lang} dict={dict.hoursContact} />    </>
   );
 }
