@@ -65,6 +65,9 @@ export const dictionary = {
     contactInfo: 'Contact Info',
     followUs: 'Follow Us',
   },
+  gallery: { // <-- AÑADIR ESTA SECCIÓN
+    title: "Our Kitchen",
+  },
   menu: {
     // --- Breakfast ---
     breakfastTacos: {
