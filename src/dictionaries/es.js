@@ -16,8 +16,8 @@ hero: {
   about: {
    since: "Desde 2007",
     mainTextKey: "thankYouMessage",
-    thankYouMessage: "Nos gustaría tomar un momento para expresar nuestra más profunda gratitud a todos ustedes. Nuestros corazones están llenos de agradecimiento por su continuo apoyo a nuestro negocio. Nuestro restaurante es un restaurante familiar, no solo un establecimiento comercial. Gracias por compartir sus historias con nosotros en cada mesa, por su apoyo inquebrantable a través de cada desafío y por ser más que solo clientes para mí y mis hijos. Dios los bendiga a todos ustedes y a sus familias. Gracias, muchas gracias. ❤️",
-    description: "Nuestro restaurante es una familia, no solo un establecimiento comercial. Gracias por compartir sus historias.", // Descripción corta
+    thankYouMessage: "Nos gustaría tomar un momento para expresar nuestra más profunda gratitud a todos ustedes. Nuestros corazones están llenos de agradecimiento por su continuo apoyo a nuestro negocio. Nuestro restaurante, no solo un establecimiento comercial, es un restaurante familiar. Gracias por compartir sus historias con nosotros en cada mesa, por su apoyo inquebrantable a través de cada desafío y por ser más que solo clientes para mí y mis hijos. Dios los bendiga a todos ustedes y a sus familias. Gracias, muchas gracias. ❤️",
+    // description: "Nuestro restaurante es una familia, no solo un establecimiento comercial. Gracias por compartir sus historias.", // Descripción corta
     imageAlt: "Mascota de Vazquez Restaurant #3",
   },
     hoursContact: {
