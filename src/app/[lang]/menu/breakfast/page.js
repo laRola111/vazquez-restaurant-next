@@ -8,11 +8,15 @@ const breakfastCategories = [ // Asegúrate que este array está definido correc
   'omelettes',
 ];
 
-export default async function BreakfastMenuPage({ params: { lang }, searchParams }) {
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'es' }];
+}
+
+export default async function BreakfastMenuPage({ params }) {
+  const { lang } = await params;
   const dict = await getDictionary(lang);
   const menuData = dict.menu;
   const pageTitle = lang === 'es' ? 'Desayunos' : 'Breakfast';
-  const searchTerm = searchParams?.q || '';
 
   // Asegúrate que categoryOrder={breakfastCategories} se está pasando
   return (
@@ -20,7 +24,6 @@ export default async function BreakfastMenuPage({ params: { lang }, searchParams
       pageTitle={pageTitle}
       menuData={menuData}
       categoryOrder={breakfastCategories} // <-- Pasar este array
-      searchTerm={searchTerm}
     />
   );
 }

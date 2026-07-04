@@ -32,7 +32,7 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    // Omitir todas las rutas internas (_next) y assets
-    '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)',
+    // Omitir todas las rutas internas, APIs, carpetas de recursos y cualquier archivo con extensión (contiene un punto)
+    '/((?!api|_next/static|_next/image|images|platos|favicon.ico|.*\\..*).*)',
   ],
 };

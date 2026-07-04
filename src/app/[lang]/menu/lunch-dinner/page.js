@@ -16,20 +16,21 @@ const lunchDinnerCategories = [
   'childMenu'
 ];
 
-// FIX: Add searchParams prop
-export default async function LunchDinnerMenuPage({ params: { lang }, searchParams }) {
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'es' }];
+}
+
+export default async function LunchDinnerMenuPage({ params }) {
+  const { lang } = await params;
   const dict = await getDictionary(lang);
   const menuData = dict.menu;
   const pageTitle = lang === 'es' ? 'Almuerzos y Cenas' : 'Lunch & Dinner';
-  // FIX: Read 'q' from searchParams
-  const searchTerm = searchParams?.q || '';
 
   return (
     <MenuPageLayout
       pageTitle={pageTitle}
       menuData={menuData}
       categoryOrder={lunchDinnerCategories}
-      searchTerm={searchTerm} // <-- Pass searchTerm
     />
   );
 }
